@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.turbare.toggleBluetoothDevice</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>find_btdev</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>toggle_btdev</string>
+				<key>modifiers</key>
+				<string></string>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>toggle_btdev</key>
+		<array>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Akihiro Uchida</string>
+	<key>description</key>
+	<string>toggle a bluetooth device pairing</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>toggle bluetooth device</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>bluedev</string>
+				<key>runningsubtext</key>
+				<string>Finding bluetooth devices</string>
+				<key>script</key>
+				<string>#!/bin/bash
+
+shopt -s nocasematch
+
+query="{query}"
+
+xpath='cat /plist/array/dict/key[.="_items"]/following-sibling::*[1]/dict/key[.="device_title"]/following-sibling::*[1]/dict/key/text()'
+devices=$(echo $xpath | xmllint --shell &lt;(system_profiler SPBluetoothDataType -detailLevel mini -xml) | grep '^\w')
+
+echo '&lt;?xml version="1.0"?&gt;'
+echo '&lt;items&gt;'
+for device in $devices; do
+  if [[ -n $query &amp;&amp; ! $device =~ $query ]]; then
+    continue
+  fi
+  cat &lt;&lt;_END_OF_ITEM_
+  &lt;item uid="$device" arg="$device"&gt;
+    &lt;title&gt;$device&lt;/title&gt;
+    &lt;subtitle&gt;toggle $device&lt;/subtitle&gt;
+  &lt;/item&gt;
+_END_OF_ITEM_
+done
+echo '&lt;/items&gt;'</string>
+				<key>subtext</key>
+				<string>Start typing a device name...</string>
+				<key>title</key>
+				<string>Toggle a bluetooth device</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>find_btdev</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(query)
+  tell application "System Events"
+    tell process "SystemUIServer"
+      tell (menu bar item 1 of menu bar 1 where description is "bluetooth")
+        click
+        tell (menu item query of menu 1)
+          click
+          click menu item 1 of menu 1
+        end tell
+      end tell
+    end tell
+  end tell
+end alfred_script</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>toggle_btdev</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Description
+
+Toggle Bluetooth device is an Alfred 2 workflow that makes it easy to manage bluetooth device pairing with bluetooth menu bar.
+
+# Usage
+
+0. Check "Show Bluetooth in menu bar" on the Bluetooth pane in System Preferences.app 
+1. Type `btdev` into Alfred followed by a space.
+2. Begin typing the name of the device you want to toggle pairing.
+3. When you see the device you want, select it from the list as usual.
+4. Press return to toggle the device.
+
+# Installation
+
+Open `Toggle Bluetooth device.alfredworkflow` with Alfred.
+
+# License
+
+[CC0](http://creativecommons.org/publicdomain/zero/1.0/)
+dedicated to the public domain, no rights reserved.
+</string>
+	<key>uidata</key>
+	<dict>
+		<key>find_btdev</key>
+		<dict>
+			<key>ypos</key>
+			<real>60.0</real>
+		</dict>
+		<key>toggle_btdev</key>
+		<dict>
+			<key>ypos</key>
+			<real>60.0</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>turbare.net</string>
+</dict>
+</plist>

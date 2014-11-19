@@ -1,0 +1,23 @@
+#!/bin/bash
+
+shopt -s nocasematch
+
+query="{query}"
+
+xpath='cat /plist/array/dict/key[.="_items"]/following-sibling::*[1]/dict/key[.="device_title"]/following-sibling::*[1]/dict/key/text()'
+devices=$(echo $xpath | xmllint --shell <(system_profiler SPBluetoothDataType -detailLevel mini -xml) | grep '^\w')
+
+echo '<?xml version="1.0"?>'
+echo '<items>'
+for device in $devices; do
+  if [[ -n $query && ! $device =~ $query ]]; then
+    continue
+  fi
+  cat <<_END_OF_ITEM_
+  <item uid="$device" arg="$device">
+    <title>$device</title>
+    <subtitle>toggle $device</subtitle>
+  </item>
+_END_OF_ITEM_
+done
+echo '</items>'

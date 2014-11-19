@@ -1,0 +1,30 @@
+bundleid: net.turbare.toggleBluetoothDevice
+category: Tools
+connections:
+  find_btdev:
+  - destinationuid: toggle_btdev
+  toggle_btdev: []
+createdby: Akihiro Uchida
+description: toggle a bluetooth device pairing
+disabled: false
+name: toggle bluetooth device
+objects:
+- config:
+    keyword: bluedev
+    runningsubtext: Finding bluetooth devices
+    script: !include 'find_btdev'
+    subtext: Start typing a device name...
+    title: Toggle a bluetooth device
+  type: alfred.workflow.input.scriptfilter
+  uid: find_btdev
+- config:
+    applescript: !include 'toggle_btdev'
+  type: alfred.workflow.action.applescript
+  uid: toggle_btdev
+readme: !include 'README'
+uidata:
+  find_btdev:
+    ypos: 60.0
+  toggle_btdev:
+    ypos: 60.0
+webaddress: turbare.net
