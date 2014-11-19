@@ -1,4 +1,6 @@
 {
     "version": 1.0,
     "remote_json": "https://github.com/uchida/alfred-toggle-btdev/raw/master/update.json",
+    "download_url": "https://github.com/uchida/alfred-toggle-btdev/releases/download/20141119/alfred-toggle-btdev.alfredworkflow",
+    "description": "initial release."
 }
