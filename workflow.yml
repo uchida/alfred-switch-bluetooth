@@ -7,7 +7,7 @@ connections:
 createdby: Akihiro Uchida
 description: toggle a bluetooth device pairing
 disabled: false
-name: toggle bluetooth device
+name: alfred-toggle-btdev
 objects:
 - config:
     keyword: bluedev

@@ -30,7 +30,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>toggle bluetooth device</string>
+	<string>alfred-toggle-btdev</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -105,11 +105,13 @@ end alfred_script</string>
 	<key>readme</key>
 	<string># Description
 
-Toggle Bluetooth device is an Alfred 2 workflow that makes it easy to manage bluetooth device pairing with bluetooth menu bar.
+This is an Alfred 2 workflow that makes it easy
+to manage bluetooth device pairing with bluetooth menu bar.
 
 # Usage
 
-0. Check "Show Bluetooth in menu bar" on the Bluetooth pane in System Preferences.app 
+0. Check "Show Bluetooth in menu bar" on the Bluetooth pane
+   in System Preferences.app 
 1. Type `btdev` into Alfred followed by a space.
 2. Begin typing the name of the device you want to toggle pairing.
 3. When you see the device you want, select it from the list as usual.
@@ -117,7 +119,7 @@ Toggle Bluetooth device is an Alfred 2 workflow that makes it easy to manage blu
 
 # Installation
 
-Open `Toggle Bluetooth device.alfredworkflow` with Alfred.
+Open `alfred-toggle-btdev.alfredworkflow` with Alfred.
 
 # License
 
