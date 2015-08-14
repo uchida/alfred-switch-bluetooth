@@ -9,6 +9,7 @@ devices=$(echo $xpath | xmllint --shell <(system_profiler SPBluetoothDataType -d
 
 echo '<?xml version="1.0"?>'
 echo '<items>'
+IFS=$'\n'
 for device in $devices; do
   if [[ -n $query && ! $device =~ $query ]]; then
     continue
