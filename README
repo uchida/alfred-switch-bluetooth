@@ -14,7 +14,9 @@ to manage bluetooth device pairing with bluetooth menu bar.
 
 # Installation
 
-Open `alfred-toggle-btdev.alfredworkflow` with Alfred.
+Download latest `alfred-toggle-btdev.alfredworkflow` from
+[Release page](https://github.com/uchida/alfred-toggle-btdev/releases).
+Open `alfred-toggle-btdev.alfredworkflow` with Alfred to install workflow.
 
 # License
 
