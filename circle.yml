@@ -1,0 +1,22 @@
+machine:
+  python:
+    version: 2.7.10
+  environment:
+    GITHUB_USER: $CIRCLE_PROJECT_USERNAME
+
+dependencies:
+  override:
+    - go get github.com/github/hub
+    - hub version
+  pre:
+    - pip install git+https://github.com/uchida/yamlfred.git
+
+test:
+  override:
+    - yamlfred create "${CIRCLE_PROJECT_REPONAME}"
+
+deployment:
+  release:
+    tag: /[0-9]+\.[0-9]+\.[0-9]+/
+    commands:
+      - hub release create -a "${CIRCLE_PROJECT_REPONAME}.alfredworkflow" -m "Release ${CIRCLE_TAG}" "${CIRCLE_TAG}"
