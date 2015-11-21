@@ -10,6 +10,7 @@ disabled: false
 name: alfred-toggle-btdev
 objects:
 - config:
+    argumenttype: 1
     keyword: bluedev
     runningsubtext: Finding bluetooth devices
     script: !include 'find_btdev'
