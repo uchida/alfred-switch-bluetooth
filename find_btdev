@@ -3,6 +3,7 @@
 shopt -s nocasematch
 
 query="{query}"
+[ $query = "{query}" ] && query="$@"
 
 xpath='cat /plist/array/dict/key[.="_items"]/following-sibling::*[1]/dict/key[.="device_title"]/following-sibling::*[1]/dict/key/text()'
 devices=$(echo $xpath | xmllint --shell <(system_profiler SPBluetoothDataType -detailLevel mini -xml) | grep '^\w')
