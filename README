@@ -7,16 +7,16 @@ to manage bluetooth device pairing with bluetooth menu bar.
 
 0. Check "Show Bluetooth in menu bar" on the Bluetooth pane
    in System Preferences.app 
-1. Type `btdev` into Alfred followed by a space.
-2. Begin typing the name of the device you want to toggle pairing.
+1. Type `bluetooth` into Alfred followed by a space.
+2. Begin typing the name of the device you want to switch pairing.
 3. When you see the device you want, select it from the list as usual.
-4. Press return to toggle the device.
+4. Press return to switch the device.
 
 # Installation
 
-Download latest `alfred-toggle-btdev.alfredworkflow` from
-[Release page](https://github.com/uchida/alfred-toggle-btdev/releases).
-Open `alfred-toggle-btdev.alfredworkflow` with Alfred to install workflow.
+Download latest `alfred-switch-bluetooth.alfredworkflow` from
+[Release page](https://github.com/uchida/alfred-switch-bluetooth/releases).
+Open `alfred-switch-bluetooth.alfredworkflow` with Alfred to install workflow.
 
 # License
 

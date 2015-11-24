@@ -1,6 +1,6 @@
 {
     "version": 1.0,
-    "remote_json": "https://github.com/uchida/alfred-toggle-btdev/raw/master/update.json",
-    "download_url": "https://github.com/uchida/alfred-toggle-btdev/releases/download/20150814/alfred-toggle-btdev.alfredworkflow",
+    "remote_json": "https://github.com/uchida/alfred-switch-bluetooth/raw/master/update.json",
+    "download_url": "https://github.com/uchida/alfred-switch-bluetooth/releases/download/20151125/alfred-switch-bluetooth.alfredworkflow",
     "description": "change workflow name."
 }

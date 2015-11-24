@@ -18,7 +18,7 @@ for device in $devices; do
   cat <<_END_OF_ITEM_
   <item uid="$device" arg="$device">
     <title>$device</title>
-    <subtitle>toggle $device</subtitle>
+    <subtitle>switch $device</subtitle>
   </item>
 _END_OF_ITEM_
 done

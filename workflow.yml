@@ -1,31 +1,31 @@
-bundleid: net.turbare.toggleBluetoothDevice
+bundleid: net.turbare.switchBluetoothDevice
 category: Tools
 connections:
-  find_btdev:
-  - destinationuid: toggle_btdev
-  toggle_btdev: []
+  filter_bluetooth:
+  - destinationuid: switch_bluetooth
+  switch_bluetooth: []
 createdby: Akihiro Uchida
-description: toggle a bluetooth device pairing
+description: switch a bluetooth device pairing
 disabled: false
-name: alfred-toggle-btdev
+name: alfred-switch-bluetooth
 objects:
 - config:
     argumenttype: 1
     keyword: bluedev
-    runningsubtext: Finding bluetooth devices
-    script: !include 'find_btdev'
+    runningsubtext: filtering bluetooth devices
+    script: !include 'filter_bluetooth'
     subtext: Start typing a device name...
     title: Toggle a bluetooth device
   type: alfred.workflow.input.scriptfilter
-  uid: find_btdev
+  uid: filter_bluetooth
 - config:
-    applescript: !include 'toggle_btdev'
+    applescript: !include 'switch_bluetooth'
   type: alfred.workflow.action.applescript
-  uid: toggle_btdev
+  uid: switch_bluetooth
 readme: !include 'README'
 uidata:
-  find_btdev:
+  filter_bluetooth:
     ypos: 60.0
-  toggle_btdev:
+  switch_bluetooth:
     ypos: 60.0
-webaddress: turbare.net
+webaddress: github.com/uchida/alfred-switch-bluetooth
