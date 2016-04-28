@@ -2,13 +2,23 @@ machine:
   python:
     version: 2.7.10
   environment:
+    PATH: "${HOME}/bin:${PATH}"
     GITHUB_USER: $CIRCLE_PROJECT_USERNAME
+    HUB_URL: "https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz"
+    HUB_SHA256SUM: 54c35a459a4241b7ae4c28bcfea0ceef849dd2f8a9dd2b82ba2ba964a743e6bc
 
 dependencies:
+  cache_directories:
+    - "~/bin"
   override:
-    - go get github.com/github/hub
+    - |
+      if [ ! -e "${HOME}/bin/hub" ]; then
+        curl -Lo hub.tgz "${HUB_URL}"
+        echo "${HUB_SHA256SUM}  hub.tgz" | sha256sum -c || exit $?
+        tar xf hub.tgz -C /tmp --strip-components 1
+        cp /tmp/bin/hub ~/bin/
+      fi
     - hub version
-  pre:
     - pip install git+https://github.com/uchida/yamlfred.git
 
 test:
