@@ -5,8 +5,8 @@ shopt -s nocasematch
 query="{query}"
 [ $query = "{query}" ] && query="$@"
 
-xpath='cat /plist/array/dict/key[.="_items"]/following-sibling::*[1]/dict/key[.="device_title"]/following-sibling::*[1]/dict/dict/key[.="device_services"]/following-sibling::*[1]/text()'
-devices=$(echo $xpath | xmllint --shell <(system_profiler SPBluetoothDataType -detailLevel mini -xml) | grep '^\w')
+xpath='cat /plist/array/dict/key[.="_items"]/following-sibling::*[1]/dict/key[.="device_title"]/following-sibling::*[1]/dict/key/text()'
+devices=$(echo $xpath | xmllint --shell <(system_profiler SPBluetoothDataType -xml) | grep '^\w')
 
 echo '<?xml version="1.0"?>'
 echo '<items>'
