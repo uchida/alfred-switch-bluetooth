@@ -13,9 +13,9 @@ dependencies:
   override:
     - |
       if [ ! -e "${HOME}/bin/hub" ]; then
-        curl -Lo hub.tgz "${HUB_URL}"
+        curl -Lo ~/hub.tgz "${HUB_URL}"
         echo "${HUB_SHA256SUM}  hub.tgz" | sha256sum -c || exit $?
-        tar xf hub.tgz -C /tmp --strip-components 1
+        tar xf ~/hub.tgz -C /tmp --strip-components 1
         cp /tmp/bin/hub ~/bin/
       fi
     - hub version
@@ -23,7 +23,7 @@ dependencies:
 
 test:
   override:
-    - yamlfred create "${CIRCLE_PROJECT_REPONAME}"
+    - yamlfred create --exclude '.git' --exclude 'venv' "${CIRCLE_PROJECT_REPONAME}"
 
 deployment:
   release:
