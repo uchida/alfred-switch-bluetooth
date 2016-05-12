@@ -20,7 +20,7 @@ dependencies:
         cp /tmp/bin/hub ~/bin/
       fi
     - hub version
-    - pip install git+https://github.com/uchida/yamlfred.git
+    - pip install --upgrade git+https://github.com/uchida/yamlfred.git
 
 test:
   override:
