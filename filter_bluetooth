@@ -5,20 +5,28 @@ shopt -s nocasematch
 query="{query}"
 [ $query = "{query}" ] && query="$@"
 
-xpath='cat /plist/array/dict/key[.="_items"]/following-sibling::*[1]/dict/key[.="device_title"]/following-sibling::*[1]/dict/key/text()'
-devices=$(echo $xpath | xmllint --shell <(system_profiler SPBluetoothDataType -xml) | grep '^\w')
+xml="$(system_profiler SPBluetoothDataType -xml | plutil -extract '0._items.0.device_title' xml1 -o - -)"
+xpath='xpath count(/plist/array/dict)'
+count=$(echo $xpath | xmllint --shell <(echo $xml) | grep -E -o '\d+$')
 
 echo '<?xml version="1.0"?>'
 echo '<items>'
-IFS=$'\n'
-for device in $devices; do
+for i in $(seq $count); do
+  device=$(echo "cat /plist/array/dict[$i]/key/text()" | xmllint --shell <(echo $xml) | grep '^\w')
   if [[ -n $query && ! $device =~ $query ]]; then
     continue
+  fi
+  connected=$(echo "cat /plist/array/dict[$i]/dict/key[.=\"device_isconnected\"]/following-sibling::*[1]/text()" |
+    xmllint --shell <(echo $xml) | grep '^\w')
+  if [ "$connected" == "attrib_Yes" ]; then
+    action="Disconnect"
+  else
+    action="Connect"
   fi
   cat <<_END_OF_ITEM_
   <item uid="$device" arg="$device">
     <title>$device</title>
-    <subtitle>switch $device</subtitle>
+    <subtitle>$action $device</subtitle>
   </item>
 _END_OF_ITEM_
 done
