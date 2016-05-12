@@ -13,9 +13,10 @@ dependencies:
   override:
     - |
       if [ ! -e "${HOME}/bin/hub" ]; then
-        curl -Lo ~/hub.tgz "${HUB_URL}"
+        curl -Lo hub.tgz "${HUB_URL}"
         echo "${HUB_SHA256SUM}  hub.tgz" | sha256sum -c || exit $?
-        tar xf ~/hub.tgz -C /tmp --strip-components 1
+        tar xf hub.tgz -C /tmp --strip-components 1
+        rm -rf hub.tgz
         cp /tmp/bin/hub ~/bin/
       fi
     - hub version
